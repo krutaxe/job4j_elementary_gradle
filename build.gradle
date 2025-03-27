@@ -1,0 +1,38 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+    testImplementation libs.org.junit.jupiter.junit.jupiter.engine
+    testImplementation libs.org.junit.vintage.junit.vintage.engine
+    testImplementation libs.org.assertj.assertj.core
+}
+
+group = 'ru.job4j'
+version = '1.0'
+description = 'elementary_gradle'
+java.sourceCompatibility = JavaVersion.VERSION_17
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
